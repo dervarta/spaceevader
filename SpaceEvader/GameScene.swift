@@ -65,7 +65,26 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        let bullet = SKSpriteNode()
+        bullet.color = UIColor.green
+        bullet.size = CGSize(width: 5, height: 5)
+        bullet.position = CGPoint(x: hero.position.x, y:hero.position.y)
+        addChild(bullet)
+        
+        guard let touch = touches.first else { return }
+        
+        let touchLocation = touch.location(in: self)
+        
+        let vector = CGVector(dx: -(hero.position.x - touchLocation.x), dy: -(hero.position.y - touchLocation.y))
+        
+        let projectileAction = SKAction.sequence([
+            SKAction.repeat(
+                SKAction.move(by: vector, duration: 0.5), count: 10),
+            SKAction.wait(forDuration: 0.5),
+            SKAction.removeFromParent()
+            ])
+        bullet.run(projectileAction)
+        
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
