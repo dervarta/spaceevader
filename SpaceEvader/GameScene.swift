@@ -29,8 +29,41 @@ class GameScene: SKScene {
         hero.position = CGPoint(x: xCoord, y: yCoord)
         
         addChild(hero)
+        
+        let swipeUp : UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUp(sender:)))
+        swipeUp.direction = .up
+        view.addGestureRecognizer(swipeUp)
+        
+        let swipeDown : UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(sender:)))
+        swipeDown.direction = .down
+        view.addGestureRecognizer(swipeDown)
+        
+        let swipeLeft : UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeRight(sender:)))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
+        
+        
     }
     
+    func swipeUp (sender:UISwipeGestureRecognizer){
+        print("UP")
+    }
+    
+    func swipeDown (sender:UISwipeGestureRecognizer){
+        print("DOWN")
+    }
+    
+    func  swipeLeft (sender:UISwipeGestureRecognizer){
+        print("LEFT")
+    }
+    
+    func swipeRight(sender:UISwipeGestureRecognizer){
+        print("RIGHT")
+    }
     
     func touchDown(atPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
