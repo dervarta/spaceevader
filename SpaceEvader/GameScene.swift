@@ -15,6 +15,7 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     
     let hero = SKSpriteNode(imageNamed: "Spaceship")
+    let heroSpeed : CGFloat = 100.0
     
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.black
@@ -50,19 +51,36 @@ class GameScene: SKScene {
     }
     
     func swipeUp (sender:UISwipeGestureRecognizer){
-        print("UP")
+        var actionMove : SKAction
+        
+        actionMove = SKAction.move(to: CGPoint(x: hero.position.x , y: hero.position.y + heroSpeed), duration: 0.5)
+        
+        hero.run(actionMove)
+        
     }
     
     func swipeDown (sender:UISwipeGestureRecognizer){
-        print("DOWN")
+        var actionMove : SKAction
+        
+        actionMove = SKAction.move(to: CGPoint(x: hero.position.x , y: hero.position.y - heroSpeed), duration: 0.5)
+        
+        hero.run(actionMove)
     }
     
     func  swipeLeft (sender:UISwipeGestureRecognizer){
-        print("LEFT")
+        var actionMove : SKAction
+        
+        actionMove = SKAction.move(to: CGPoint(x: hero.position.x - heroSpeed, y: hero.position.y), duration: 0.5)
+        
+        hero.run(actionMove)
     }
     
     func swipeRight(sender:UISwipeGestureRecognizer){
-        print("RIGHT")
+        var actionMove : SKAction
+        
+        actionMove = SKAction.move(to: CGPoint(x: hero.position.x + heroSpeed, y: hero.position.y), duration: 0.5)
+        
+        hero.run(actionMove)
     }
     
     func touchDown(atPoint pos : CGPoint) {
