@@ -53,7 +53,16 @@ class GameScene: SKScene {
     func swipeUp (sender:UISwipeGestureRecognizer){
         var actionMove : SKAction
         
-        actionMove = SKAction.move(to: CGPoint(x: hero.position.x , y: hero.position.y + heroSpeed), duration: 0.5)
+        if (hero.position.y + heroSpeed >= size.height){
+            
+            actionMove = SKAction.move(to: CGPoint(x: hero.position.x, y: size.height - hero.size.height/2), duration: 0.5)
+            
+        }
+        else {
+            
+            actionMove = SKAction.move(to: CGPoint(x: hero.position.x , y: hero.position.y + heroSpeed), duration: 0.5)
+            
+        }
         
         hero.run(actionMove)
         
@@ -62,7 +71,12 @@ class GameScene: SKScene {
     func swipeDown (sender:UISwipeGestureRecognizer){
         var actionMove : SKAction
         
-        actionMove = SKAction.move(to: CGPoint(x: hero.position.x , y: hero.position.y - heroSpeed), duration: 0.5)
+        if (hero.position.y - heroSpeed <= 0){
+            actionMove = SKAction.move(to: CGPoint(x: hero.position.x, y: hero.size.height/2), duration: 0.5)
+        }
+        else {
+             actionMove = SKAction.move(to: CGPoint(x: hero.position.x , y: hero.position.y - heroSpeed), duration: 0.5)
+        }
         
         hero.run(actionMove)
     }
@@ -70,7 +84,12 @@ class GameScene: SKScene {
     func  swipeLeft (sender:UISwipeGestureRecognizer){
         var actionMove : SKAction
         
-        actionMove = SKAction.move(to: CGPoint(x: hero.position.x - heroSpeed, y: hero.position.y), duration: 0.5)
+        if (hero.position.x - heroSpeed <= 0){
+            actionMove = SKAction.move(to:CGPoint(x: hero.size.width/2, y: hero.position.y), duration: 0.5)
+        }
+        else {
+              actionMove = SKAction.move(to: CGPoint(x: hero.position.x - heroSpeed, y: hero.position.y), duration: 0.5)
+        }
         
         hero.run(actionMove)
     }
@@ -78,7 +97,12 @@ class GameScene: SKScene {
     func swipeRight(sender:UISwipeGestureRecognizer){
         var actionMove : SKAction
         
-        actionMove = SKAction.move(to: CGPoint(x: hero.position.x + heroSpeed, y: hero.position.y), duration: 0.5)
+        if (hero.position.x + heroSpeed >= size.width){
+            actionMove = SKAction.move(to: CGPoint(x: size.width - hero.size.width/2, y: hero.position.y), duration: 0.5)
+        }
+        else {
+            actionMove = SKAction.move(to: CGPoint(x: hero.position.x + heroSpeed, y: hero.position.y), duration: 0.5)
+        }
         
         hero.run(actionMove)
     }
